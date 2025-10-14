@@ -1,0 +1,5 @@
+# Ignore SQLite database files
+*.db
+
+# Ignore the data folder and its content
+data/
