@@ -1,34 +1,30 @@
-# Brazilian E-commerce Public Dataset Analysis
+# Phase 1: Local Data Engineering & Exploratory Analysis (Python/SQL)
 
 ## 🎯 Objective
-This project analyzes a public dataset from a Brazilian e-commerce platform to uncover business insights related to customers, products, and sales performance. The goal is to answer key business questions using Python, Pandas, and SQL.
+This was the first phase of my Olist E-commerce trilogy. The goal was to build a local data foundation by ingesting raw datasets into a relational database and performing deep-dive exploratory data analysis (EDA) to uncover the "why" behind sales and satisfaction trends.
 
 ## 📦 Data Source
-The data is from the "Brazilian E-commerce Public Dataset by Olist," available on [Kaggle](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce). It contains information about orders, products, customers, and reviews.
+The dataset consists of ~100k orders from 2016 to 2018 in Brazil, provided by Olist.
 
-## 🛠️ Project Workflow
-The project is structured as a series of Python scripts, executed in order:
+## 🏗️ Technical Architecture (The Ground Floor)
+This project focuses on **Local Data Engineering**. I developed a modular pipeline of Python scripts to automate the ingestion and analysis process:
 
-1.  **`01_create_database.py`**: Reads the 9 raw CSV files from the `/data` directory and loads them into a centralized SQLite database (`olist.db`).
-2.  **`02_customer_analysis.py`**: Queries the database to analyze the geographic distribution of customers.
-3.  **`03_product_revenue_analysis.py`**: Identifies the top 10 most profitable product categories.
-4.  **`04_satisfaction_analysis.py`**: Analyzes the correlation between delivery times and customer review scores.
-5.  **`05_visualize_customer_distribution.py`**: Generates a bar chart visualizing the top 15 states by customer count.
+1.  **`01_create_database.py`**: Uses `SQLAlchemy` to programmatically read 9 CSV files and build a structured SQLite database.
+2.  **`02_customer_analysis.py`**: SQL-driven analysis of customer geographic concentration.
+3.  **`03_product_revenue_analysis.py`**: Financial analysis using multi-table joins to identify top-performing categories.
+4.  **`04_satisfaction_analysis.py`**: Advanced SQL query using `JULIANDAY` to calculate average delivery times per review score.
+5.  **`05_visualize_customer_distribution.py`**: Statistical visualization using `Seaborn` and `Matplotlib`.
 
-## 📊 Key Findings & Visualizations
+## 📊 Key Findings
+* **Market Concentration:** São Paulo (SP) is the primary hub, followed by RJ and MG.
+* **Revenue Leaders:** `beleza_saude` and `relogios_presentes` emerged as the most profitable categories.
+* **Logistics & Satisfaction:** I discovered a critical correlation—1-star reviews are directly tied to longer delivery windows (calculated as an average of days between purchase and delivery).
 
-### Customer Distribution by State
-The analysis shows that the customer base is heavily concentrated in the state of São Paulo (SP), followed by Rio de Janeiro (RJ) and Minas Gerais (MG). This visualization highlights key markets.
+## 🚀 The Journey Continues
+After mastering the local analysis, I moved this project forward into two more advanced phases:
+* **[Phase 2: Business Intelligence (Power BI)](https://github.com/ZinelabidineCh/olist-bi-powerbi-dashboard)** - Turning these insights into an executive-level interactive dashboard.
+* **[Phase 3: Production Cloud ELT (GCP)](https://github.com/ZinelabidineCh/olist-elt-pipeline-gcp-looker)** - Scaling the entire pipeline to the cloud using BigQuery and Dataform.
 
-![Customer Distribution by State](customer_distribution_by_state.png)
-
-### Key Insights
-* **Top Product Categories by Revenue:** The most profitable categories are `beleza_saude` (Health & Beauty), `relogios_presentes` (Watches & Gifts), and `cama_mesa_banho` (Bed, Bath & Table).
-* **Satisfaction vs. Delivery Time:** There is a strong negative correlation between delivery time and satisfaction. Orders with a 1-star review take, on average, twice as long to arrive as orders with a 5-star review.
-
-## 💻 Technologies Used
-- Python
-- Pandas
-- SQLAlchemy
-- Matplotlib & Seaborn
-- SQLite
+## 💻 Tech Stack
+- **Languages:** Python, SQL (SQLite)
+- **Libraries:** Pandas, SQLAlchemy, Seaborn, Matplotlib
